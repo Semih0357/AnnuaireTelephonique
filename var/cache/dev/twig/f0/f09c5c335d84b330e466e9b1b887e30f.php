@@ -59,16 +59,18 @@ class __TwigTemplate_583ad043ca6e392b108b5f52fce5b33d extends Template
         $this->displayBlock('stylesheets', $context, $blocks);
         // line 11
         echo "
+
+
         ";
-        // line 12
+        // line 14
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 15
+        // line 17
         echo "    </head>
     <body>
         ";
-        // line 17
+        // line 19
         $this->displayBlock('body', $context, $blocks);
-        // line 18
+        // line 20
         echo "    </body>
 </html>
 ";
@@ -122,7 +124,7 @@ class __TwigTemplate_583ad043ca6e392b108b5f52fce5b33d extends Template
 
     }
 
-    // line 12
+    // line 14
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -132,7 +134,7 @@ class __TwigTemplate_583ad043ca6e392b108b5f52fce5b33d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 13
+        // line 15
         echo "            ";
         echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("app");
         echo "
@@ -145,7 +147,7 @@ class __TwigTemplate_583ad043ca6e392b108b5f52fce5b33d extends Template
 
     }
 
-    // line 17
+    // line 19
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -155,6 +157,7 @@ class __TwigTemplate_583ad043ca6e392b108b5f52fce5b33d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
+        echo "Test";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -170,7 +173,7 @@ class __TwigTemplate_583ad043ca6e392b108b5f52fce5b33d extends Template
 
     public function getDebugInfo()
     {
-        return array (  149 => 17,  136 => 13,  126 => 12,  113 => 9,  103 => 8,  84 => 5,  72 => 18,  70 => 17,  66 => 15,  64 => 12,  61 => 11,  58 => 8,  53 => 5,  47 => 1,);
+        return array (  151 => 19,  138 => 15,  128 => 14,  115 => 9,  105 => 8,  86 => 5,  74 => 20,  72 => 19,  68 => 17,  66 => 14,  61 => 11,  58 => 8,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -186,12 +189,14 @@ class __TwigTemplate_583ad043ca6e392b108b5f52fce5b33d extends Template
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
+
+
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}Test{% endblock %}
     </body>
 </html>
 ", "base.html.twig", "/Users/semihbasbunar/Desktop/AnnuaireTel/annuaire/templates/base.html.twig");

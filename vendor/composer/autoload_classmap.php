@@ -6,7 +6,15 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controller\\HomeController' => $baseDir . '/src/Controller/HomeController.php',
+    'App\\Controller\\LoginController' => $baseDir . '/src/Controller/LoginController.php',
+    'App\\Controller\\RegisterController' => $baseDir . '/src/Controller/RegisterController.php',
+    'App\\Entity\\Contact' => $baseDir . '/src/Entity/Contact.php',
+    'App\\Entity\\User' => $baseDir . '/src/Entity/User.php',
+    'App\\Form\\RegisterType' => $baseDir . '/src/Form/RegisterType.php',
     'App\\Kernel' => $baseDir . '/src/Kernel.php',
+    'App\\Repository\\ContactRepository' => $baseDir . '/src/Repository/ContactRepository.php',
+    'App\\Repository\\UserRepository' => $baseDir . '/src/Repository/UserRepository.php',
     'Collator' => $vendorDir . '/symfony/polyfill-intl-icu/Resources/stubs/Collator.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'DeepCopy\\DeepCopy' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
@@ -5365,6 +5373,7 @@ return array(
     'Symfony\\WebpackEncoreBundle\\Asset\\IntegrityDataProviderInterface' => $vendorDir . '/symfony/webpack-encore-bundle/src/Asset/IntegrityDataProviderInterface.php',
     'Symfony\\WebpackEncoreBundle\\Asset\\TagRenderer' => $vendorDir . '/symfony/webpack-encore-bundle/src/Asset/TagRenderer.php',
     'Symfony\\WebpackEncoreBundle\\CacheWarmer\\EntrypointCacheWarmer' => $vendorDir . '/symfony/webpack-encore-bundle/src/CacheWarmer/EntrypointCacheWarmer.php',
+    'Symfony\\WebpackEncoreBundle\\DependencyInjection\\Compiler\\RemoveStimulusServicesPass' => $vendorDir . '/symfony/webpack-encore-bundle/src/DependencyInjection/Compiler/RemoveStimulusServicesPass.php',
     'Symfony\\WebpackEncoreBundle\\DependencyInjection\\Configuration' => $vendorDir . '/symfony/webpack-encore-bundle/src/DependencyInjection/Configuration.php',
     'Symfony\\WebpackEncoreBundle\\DependencyInjection\\WebpackEncoreExtension' => $vendorDir . '/symfony/webpack-encore-bundle/src/DependencyInjection/WebpackEncoreExtension.php',
     'Symfony\\WebpackEncoreBundle\\Dto\\AbstractStimulusDto' => $vendorDir . '/symfony/webpack-encore-bundle/src/Dto/AbstractStimulusDto.php',
