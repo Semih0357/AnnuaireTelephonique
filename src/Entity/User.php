@@ -15,17 +15,24 @@ class User
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $firstName = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lastName = null;
+
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Contact::class, orphanRemoval: true)]
+    private Collection $contacts;
+
     #[ORM\Column(nullable: true)]
     private array $roles = [];
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Contact::class)]
-    private Collection $contacts;
 
     public function __construct()
     {
@@ -35,6 +42,30 @@ class User
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -61,45 +92,45 @@ class User
         return $this;
     }
 
-    public function getRoles(): array
-    {
-        return $this->roles;
-    }
+     /**
+      * @return Collection<int, Contact>
+      */
+     public function getContacts(): Collection
+     {
+         return $this->contacts;
+     }
 
-    public function setRoles(?array $roles): self
-    {
-        $this->roles = $roles;
+     public function addContact(Contact $contact): self
+     {
+         if (!$this->contacts->contains($contact)) {
+             $this->contacts->add($contact);
+             $contact->setUser($this);
+         }
 
-        return $this;
-    }
+         return $this;
+     }
 
-    /**
-     * @return Collection<int, Contact>
-     */
-    public function getContacts(): Collection
-    {
-        return $this->contacts;
-    }
+     public function removeContact(Contact $contact): self
+     {
+         if ($this->contacts->removeElement($contact)) {
+             // set the owning side to null (unless already changed)
+             if ($contact->getUser() === $this) {
+                 $contact->setUser(null);
+             }
+         }
 
-    public function addContact(Contact $contact): self
-    {
-        if (!$this->contacts->contains($contact)) {
-            $this->contacts->add($contact);
-            $contact->setUser($this);
-        }
+         return $this;
+     }
 
-        return $this;
-    }
+     public function getRoles(): array
+     {
+         return $this->roles;
+     }
 
-    public function removeContact(Contact $contact): self
-    {
-        if ($this->contacts->removeElement($contact)) {
-            // set the owning side to null (unless already changed)
-            if ($contact->getUser() === $this) {
-                $contact->setUser(null);
-            }
-        }
+     public function setRoles(?array $roles): self
+     {
+         $this->roles = $roles;
 
-        return $this;
-    }
+         return $this;
+     }
 }

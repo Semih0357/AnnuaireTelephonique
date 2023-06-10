@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ContactRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
@@ -15,38 +13,24 @@ class Contact
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $firstName = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $lastName = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $phoneNumber = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $address = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $city = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $zipCode = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $country = null;
 
     #[ORM\ManyToOne(inversedBy: 'contacts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
-
-    #[ORM\OneToMany(mappedBy: 'contact', targetEntity: PhoneNumber::class, orphanRemoval: true)]
-    private Collection $phoneNumbers;
-
-    public function __construct()
-    {
-        $this->phoneNumbers = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -58,7 +42,7 @@ class Contact
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName): self
+    public function setFirstName(?string $firstName): self
     {
         $this->firstName = $firstName;
 
@@ -70,9 +54,21 @@ class Contact
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName): self
+    public function setLastName(?string $lastName): self
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
@@ -82,7 +78,7 @@ class Contact
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -94,45 +90,9 @@ class Contact
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(?string $address): self
     {
         $this->address = $address;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(?string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getZipCode(): ?string
-    {
-        return $this->zipCode;
-    }
-
-    public function setZipCode(?string $zipCode): self
-    {
-        $this->zipCode = $zipCode;
-
-        return $this;
-    }
-
-    public function getCountry(): ?string
-    {
-        return $this->country;
-    }
-
-    public function setCountry(?string $country): self
-    {
-        $this->country = $country;
 
         return $this;
     }
@@ -145,36 +105,6 @@ class Contact
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, PhoneNumber>
-     */
-    public function getPhoneNumbers(): Collection
-    {
-        return $this->phoneNumbers;
-    }
-
-    public function addPhoneNumber(PhoneNumber $phoneNumber): self
-    {
-        if (!$this->phoneNumbers->contains($phoneNumber)) {
-            $this->phoneNumbers->add($phoneNumber);
-            $phoneNumber->setContact($this);
-        }
-
-        return $this;
-    }
-
-    public function removePhoneNumber(PhoneNumber $phoneNumber): self
-    {
-        if ($this->phoneNumbers->removeElement($phoneNumber)) {
-            // set the owning side to null (unless already changed)
-            if ($phoneNumber->getContact() === $this) {
-                $phoneNumber->setContact(null);
-            }
-        }
 
         return $this;
     }
